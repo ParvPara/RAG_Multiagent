@@ -8,7 +8,7 @@ class GradeAnswer(BaseModel):
 
 parser = JsonOutputParser(pydantic_object=GradeAnswer)
 
-llm = Ollama(model="llama2")
+llm = Ollama(model="llama3.2")
 
 system = """You are a grader assessing whether an answer addresses / resolves a question.
 Give a binary score 'yes' or 'no'. 'Yes' means that the answer resolves the question.

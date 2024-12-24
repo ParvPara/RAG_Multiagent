@@ -11,7 +11,7 @@ class GradeDocuments(BaseModel):
 
 parser = JsonOutputParser(pydantic_object=GradeDocuments)
 
-llm = Ollama(model="llama2")
+llm = Ollama(model="llama3.2")
 
 system = """You are a grader assessing relevance of a retrieved document to a user question.
 If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant.
