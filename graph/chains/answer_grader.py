@@ -1,20 +1,20 @@
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_community.llms import Ollama
 from pydantic import BaseModel, Field
-from langchain_openai import ChatOpenAI
-
 
 class GradeAnswer(BaseModel):
+    binary_score: bool = Field(description="Answer addresses the question, 'yes' or 'no'")
 
-    binary_score: bool = Field(
-        description="Answer addresses the question, 'yes' or 'no'"
-    )
+parser = JsonOutputParser(pydantic_object=GradeAnswer)
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-
-structured_llm_grader = llm.with_structured_output(GradeAnswer)
+llm = Ollama(model="llama2")
 
 system = """You are a grader assessing whether an answer addresses / resolves a question.
-Give a binary score 'yes' or 'no'. 'Yes' means that the answer resolves the question."""
+Give a binary score 'yes' or 'no'. 'Yes' means that the answer resolves the question.
+You must respond in the following JSON format:
+{{"binary_score": true}} for yes
+{{"binary_score": false}} for no"""
 
 answer_prompt = ChatPromptTemplate.from_messages(
     [
@@ -23,4 +23,4 @@ answer_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-answer_grader = answer_prompt | structured_llm_grader
+answer_grader = answer_prompt | llm | parser
