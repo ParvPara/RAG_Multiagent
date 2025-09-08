@@ -85,7 +85,12 @@ npm install
 ```env
 # Backend API URL
 NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Access Key for Login (CHANGE THIS TO YOUR OWN SECURE KEY)
+NEXT_PUBLIC_ACCESS_KEY=your-secure-access-key-here
 ```
+
+**Important:** Replace `your-secure-access-key-here` with your own secure access key. This key will be used to authenticate users when they log into the application.
 
 ## Environment Variables Explained
 
@@ -100,6 +105,13 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 ### Frontend (.env.local)
 
 - **NEXT_PUBLIC_API_URL**: The URL where your backend API is running (default: http://localhost:8000)
+- **NEXT_PUBLIC_ACCESS_KEY**: Your secure access key for login authentication (CHANGE FROM DEFAULT)
+
+**⚠️ Important Security Note:** The access key is used for simple authentication. Make sure to:
+- Change the default key to something secure
+- Use a strong, unique key for production
+- Never commit your actual access key to version control
+- Consider implementing proper authentication (JWT, OAuth) for production use
 
 ## Usage
 
@@ -225,6 +237,10 @@ The project includes configuration files for deployment:
 2. **Qdrant Connection Issues**: Verify your Qdrant Cloud URL and API key are correct
 3. **Document Upload Fails**: Check that the file format is supported (PDF, DOCX, TXT)
 4. **Frontend Can't Connect**: Verify `NEXT_PUBLIC_API_URL` points to your running backend
+5. **Login Issues**: 
+   - Make sure `NEXT_PUBLIC_ACCESS_KEY` is set in your `.env.local` file
+   - Restart your frontend server after changing environment variables
+   - Verify the access key matches what you're entering in the login form
 
 ### Getting API Keys
 

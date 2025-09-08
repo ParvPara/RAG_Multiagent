@@ -18,8 +18,8 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Access key
-    const validKey = 'sopatech2024@compendai';
+    // Access key - should be moved to environment variables
+    const validKey = process.env.NEXT_PUBLIC_ACCESS_KEY || 'default-key-change-me';
     
     if (key === validKey) {
       localStorage.setItem('isAuthenticated', 'true');
