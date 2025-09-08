@@ -1,0 +1,13 @@
+{
+  "name": "rag-multiagent",
+  "version": "1.0.0",
+  "description": "RAG Multiagent project",
+  "private": true,
+  "scripts": {
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm start",
+    "backend:dev": "cd backend && uvicorn application:app --reload",
+    "install:all": "cd frontend && npm install && cd ../backend && pip install -r requirements.txt"
+  }
+} 
